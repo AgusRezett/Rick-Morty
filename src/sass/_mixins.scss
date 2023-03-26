@@ -1,0 +1,35 @@
+@mixin displayFlex($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin customScrollBar() {
+    //webkit scroll style
+    &::-webkit-scrollbar {
+        scroll-margin: 5px 10px;
+        width: 5px;
+        height: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+        border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-thumb--hover);
+    }
+}
+
+@mixin noSelect() {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}

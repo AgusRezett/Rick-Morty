@@ -1,0 +1,10 @@
+.parentContainer .profileImage {
+  filter: drop-shadow(0 0 0.2rem #142312);
+}
+.parentContainer .profileName {
+  color: #21d943;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=Login.module.css.map */

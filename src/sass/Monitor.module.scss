@@ -1,0 +1,88 @@
+@import 'mixins';
+
+.monitorContainer {
+	background: #050505;
+	position: relative;
+	border-top: 3px solid #1f1f1f;
+	padding: 3% 3% 6% 3%;
+	//box-shadow: 0 0 20px 0 rgba(200, 230, 255, 0.037);
+	width: 100%;
+	height: 100vh;
+
+	.monitorScreen {
+		position: relative;
+		aspect-ratio: 1 / 1;
+		width: 45%;
+
+		border-radius: 10px;
+		border-bottom-left-radius: 50% 10%;
+		border-bottom-right-radius: 50% 10%;
+
+		//background-color: #0066cc;
+		background-size: cover;
+		background-position: top center;
+		overflow: hidden;
+		@include displayFlex(column, center, center);
+
+		.lockWallpaperContent {
+			z-index: 3;
+			width: 100%;
+			height: 100%;
+			@include displayFlex(column, center, center);
+
+			.profileImage {
+				filter: drop-shadow(0 0 0.2rem #383838);
+			}
+
+			.profileName {
+				color: #fff;
+				font-weight: 300;
+				margin: 20px 0px;
+				font-size: 20px;
+				text-shadow: 0 0 10px black;
+			}
+		}
+	}
+}
+
+@media all and (min-width: 960px) {
+	.monitorScreen {
+		-webkit-animation: tvflicker 5s infinite alternate;
+		-moz-animation: tvflicker 5s infinite alternate;
+		-o-animation: tvflicker 5s infinite alternate;
+		animation: tvflicker 5s infinite alternate;
+	}
+
+	@-webkit-keyframes tvflicker {
+		0% {
+			box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+		}
+		100% {
+			box-shadow: 0 0 95px 0 rgba(66, 124, 81, 0.45);
+		}
+	}
+	@-moz-keyframes tvflicker {
+		0% {
+			box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+		}
+		100% {
+			box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+		}
+	}
+	@-o-keyframes tvflicker {
+		0% {
+			box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+		}
+		100% {
+			box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+		}
+	}
+	@keyframes tvflicker {
+		0% {
+			box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+		}
+		100% {
+			box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+		}
+	}
+}

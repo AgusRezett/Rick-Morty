@@ -1,0 +1,85 @@
+.monitorContainer {
+  background: #050505;
+  position: relative;
+  border-top: 3px solid #1f1f1f;
+  padding: 3% 3% 6% 3%;
+  width: 100%;
+  height: 100vh;
+}
+.monitorContainer .monitorScreen {
+  position: relative;
+  aspect-ratio: 1/1;
+  width: 45%;
+  border-radius: 10px;
+  border-bottom-left-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
+  background-size: cover;
+  background-position: top center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.monitorContainer .monitorScreen .lockWallpaperContent {
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.monitorContainer .monitorScreen .lockWallpaperContent .profileImage {
+  filter: drop-shadow(0 0 0.2rem #383838);
+}
+.monitorContainer .monitorScreen .lockWallpaperContent .profileName {
+  color: #fff;
+  font-weight: 300;
+  margin: 20px 0px;
+  font-size: 20px;
+  text-shadow: 0 0 10px black;
+}
+
+@media all and (min-width: 960px) {
+  .monitorScreen {
+    -webkit-animation: tvflicker 5s infinite alternate;
+    -moz-animation: tvflicker 5s infinite alternate;
+    -o-animation: tvflicker 5s infinite alternate;
+    animation: tvflicker 5s infinite alternate;
+  }
+  @-webkit-keyframes tvflicker {
+    0% {
+      box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 95px 0 rgba(66, 124, 81, 0.45);
+    }
+  }
+  @-moz-keyframes tvflicker {
+    0% {
+      box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+    }
+  }
+  @-o-keyframes tvflicker {
+    0% {
+      box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+    }
+  }
+  @keyframes tvflicker {
+    0% {
+      box-shadow: 0 0 100px 0 rgba(111, 196, 154, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 60px 0 rgba(66, 124, 81, 0.6);
+    }
+  }
+}
+
+/*# sourceMappingURL=Monitor.module.css.map */
