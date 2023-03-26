@@ -5,10 +5,12 @@
 		filter: drop-shadow(0 0 0.2rem #142312);
 	}
 
-	.profileName {
-		color: #21d943;
-		font-weight: 500;
-		//margin-bottom: 10px;
-		font-size: 16px;
+	.passwordInput {
+		background-color: transparent;
+		border: none;
+		display: inline;
+		margin-left: 10px;
+		outline: none;
+		caret-shape: block;
 	}
 }

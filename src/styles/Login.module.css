@@ -1,10 +1,13 @@
 .parentContainer .profileImage {
   filter: drop-shadow(0 0 0.2rem #142312);
 }
-.parentContainer .profileName {
-  color: #21d943;
-  font-weight: 500;
-  font-size: 16px;
+.parentContainer .passwordInput {
+  background-color: transparent;
+  border: none;
+  display: inline;
+  margin-left: 10px;
+  outline: none;
+  caret-shape: block;
 }
 
 /*# sourceMappingURL=Login.module.css.map */

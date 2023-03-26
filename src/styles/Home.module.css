@@ -12,6 +12,10 @@
 	z-index: 1;
 	width: 100%;
 	padding: 60px;
+
+	color: #21d943;
+	font-weight: 500;
+	font-size: 16px;
 }
 
 .scanlines {
