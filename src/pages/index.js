@@ -1,13 +1,62 @@
+import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
+
+// Styles
+import login from '../styles/Login.module.css';
 import styles from '@/styles/Home.module.css';
 
 // Components
-import { Monitor } from '@/common/Monitor';
 import { Login } from './login';
+import Marquee from 'react-fast-marquee';
+import CopMorty from '../assets/images/profile.png';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import { TypeAnimation } from 'react-type-animation';
+import { Prompt } from 'next/font/google';
 
 export default function Home() {
+	// Estado que maneja la visibilidad de escritura del typing automático
+	const [autoLogWritting, setAutoLogWritting] = useState(true);
+
+	// Estado que maneja si se logueó un usuario para mantener activa la escucha del evento click en useEffect
+	const [hasSentPass, setHasSentPass] = useState(false);
+	const [password, setPassword] = useState('');
+
+	const inputRef = useRef();
+	const boxRef = useRef();
+
+	const router = useRouter();
+
+	const submitPassword = (event) => {
+		event.preventDefault();
+
+		// Si la contraseña ingresada no coincide se añadirá el registro a la lista en formato de cascada
+		if (password !== 'soyinvisible') {
+			setAutoLogWritting(true);
+			const textContainer = document.getElementById('textContainer');
+			textContainer.innerHTML =
+				textContainer.outerHTML + `<p style=${'margin-top:' + '14px'}>>>> ${password}</p>`;
+			setTimeout(() => {
+				textContainer.innerHTML =
+					textContainer.outerHTML + `<p style=${'margin-top:' + '14px'}>invalid password</p>`;
+			}, 500);
+			setPassword('');
+			setAutoLogWritting(false);
+		} else {
+			router.push('/home');
+		}
+	};
+
+	useEffect(() => {
+		// Evita que el usuario desvíe el cursor de la escritura al hacer click en cualquier lado
+		window.onclick = (event) => {
+			if (!hasSentPass && inputRef.current) {
+				inputRef.current.focus();
+			}
+		};
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -20,9 +69,58 @@ export default function Home() {
 					rel="stylesheet"
 				></link>
 			</Head>
-			{/* <div className={styles.scanlines}></div> */}
+			{/* <Marquee
+				style={{
+					height: '150%',
+					overflowX: 'visible',
+					transform: 'rotate(90deg)',
+					position: 'absolute',
+				}}
+				direction={'right'}
+				gradient={false}
+			>
+			</Marquee> */}
+			{/* <div className={styles.scanlines} /> */}
 			<main className={styles.main}>
-				<Login />
+				<div className={login.parentContainer} ref={boxRef}>
+					<h1 className={login.profileName}>Rptec RAID BIOS v7.4</h1>
+					<TypeAnimation
+						style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
+						className={login.profileName}
+						sequence={[
+							`
+						(.#) username: Morty@B-308\n
+						(.#) Morty@B-308's password (shift + p):`,
+							() => {
+								setAutoLogWritting(false);
+								setTimeout(() => {
+									inputRef.current.focus();
+								}, 100);
+							},
+						]}
+						speed={75}
+						cursor={false}
+						repeat={1}
+					/>
+					<div id="textContainer"></div>
+					{!autoLogWritting && (
+						<span
+							style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '14px' }}
+						>
+							<p>{'\t>>>'}</p>
+							<form action="" onSubmit={submitPassword}>
+								<input
+									ref={inputRef}
+									onChange={(e) => setPassword(e.target.value)}
+									value={password}
+									id="message"
+									name="message"
+									className={login.passwordInput}
+								/>
+							</form>
+						</span>
+					)}
+				</div>
 			</main>
 		</>
 	);
