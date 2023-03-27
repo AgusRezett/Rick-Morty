@@ -8,27 +8,26 @@ import CopMorty from '../assets/images/profile.png';
 import Image from 'next/image';
 
 import { TypeAnimation } from 'react-type-animation';
+import { Prompt } from 'next/font/google';
 
 export const Login = () => {
+	// Estado que maneja la visibilidad de escritura del typing automático
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
-	const [hasSentPass, sethasSentPass] = useState(false);
+	// Estado que maneja si se logueó un usuario para mantener activa la escucha del evento click en useEffect
+	const [hasSentPass, setHasSentPass] = useState(false);
 
 	const [password, setPassword] = useState('');
 
-	const inputRef = useRef(null);
+	const inputRef = useRef();
 	const boxRef = useRef();
 
 	const submitPassword = (event) => {
 		event.preventDefault();
-		console.log(password);
 
+		// Si la contraseña ingresada no coincide se añadirá el registro a la lista en formato de cascada
 		if (password !== 'soyinvisible') {
 			setAutoLogWritting(true);
 			const textContainer = document.getElementById('textContainer');
-
-			//const e = document.createElement('div');
-			//console.log(e);
-			//e.innerHTML = 'JavaScript DOM';
 			textContainer.innerHTML =
 				textContainer.outerHTML + `<p style=${'margin-top:' + '14px'}>>>> ${password}</p>`;
 			setTimeout(() => {
@@ -38,10 +37,13 @@ export const Login = () => {
 			setPassword('');
 			setAutoLogWritting(false);
 		} else {
+			//redireccionar a home
+			//...
 		}
 	};
 
 	useEffect(() => {
+		// Evita que el usuario desvíe el cursor de la escritura al hacer click en cualquier lado
 		window.onclick = (event) => {
 			if (!hasSentPass && inputRef.current) {
 				inputRef.current.focus();
@@ -52,14 +54,6 @@ export const Login = () => {
 	return (
 		<>
 			<div className={login.parentContainer} ref={boxRef}>
-				{/* <Image
-					className={login.profileImage}
-					src={CopMorty}
-					alt="Picture of the author"
-					width={'20%'}
-					height={'20%'}
-					style={{ height: 'auto', width: '20%', filter: 'drop-shadow(0 0 0.2rem #142312)' }}
-				/> */}
 				<p className={login.profileName}>Rptec RAID BIOS v7.4</p>
 				<TypeAnimation
 					style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
@@ -67,7 +61,7 @@ export const Login = () => {
 					sequence={[
 						`
 						(.#) username: Morty@B-308\n
-						(.#) enter password (visible with: shift + p): `, // actual line-break inside string literal also gets animated in new line, but ensure there are no leading spaces
+						(.#) Morty@B-308's password (shift + p):`,
 						() => {
 							setAutoLogWritting(false);
 							setTimeout(() => {
