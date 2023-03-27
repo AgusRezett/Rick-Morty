@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -7,16 +8,19 @@ import menu from '@/styles/Menu.module.css';
 
 // Components
 import { TypeAnimation } from 'react-type-animation';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { CharTerminal } from './CharTerminal';
 
 export default function Home() {
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
 	const [selectedOption, setSelectedOption] = useState(0);
+	const [blockedMenu, setBlockedMenu] = useState(false);
 	const router = useRouter();
 
+	const [charTerminalVisible, setCharTerminalVisible] = useState(false);
+
 	const options = [
-		{ value: 0, name: 'Show all' },
+		{ value: 0, name: 'Show all', action: () => setCharTerminalVisible(!charTerminalVisible) },
 		{ value: 1, name: 'List selected' },
 		{ value: 2, name: 'Search' },
 		{ value: 3, name: 'Exit console', action: router.back },
@@ -48,6 +52,7 @@ export default function Home() {
 				return option.value === selectedOption;
 			});
 			optionSelected.action();
+			//setBlockedMenu(false);
 
 			//console.log(selectedOption);
 			//document.getElementById('menuOption' + selectedOption).click();
@@ -66,10 +71,12 @@ export default function Home() {
 			} */
 		};
 		useEffect(() => {
-			document.addEventListener('keydown', onKeyDown);
-			return () => {
-				document.removeEventListener('keydown', onKeyDown);
-			};
+			if (!blockedMenu) {
+				document.addEventListener('keydown', onKeyDown);
+				return () => {
+					document.removeEventListener('keydown', onKeyDown);
+				};
+			}
 		}, [onKeyDown]);
 	};
 
@@ -148,6 +155,8 @@ export default function Home() {
 						</div>
 					</>
 				)}
+
+				<CharTerminal visible={charTerminalVisible} setVisible={setCharTerminalVisible} />
 			</main>
 		</>
 	);

@@ -6,7 +6,6 @@ import login from '../styles/Login.module.css';
 import styles from '@/styles/Home.module.css';
 
 // Components
-import { Login } from './login';
 import Marquee from 'react-fast-marquee';
 import CopMorty from '../assets/images/profile.png';
 import Image from 'next/image';
