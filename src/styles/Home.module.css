@@ -28,7 +28,21 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	opacity: 0.4;
+	pointer-events: none;
 	/* transform: rotate(-90deg); */
+}
+
+.plate {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 0;
+	filter: sepia(1) hue-rotate(65deg) contrast(0.9) saturate(1.5);
+	opacity: 0.3;
 }
 
 @keyframes tvscanmoves {

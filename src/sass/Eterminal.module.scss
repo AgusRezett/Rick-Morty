@@ -65,6 +65,8 @@
 			align-content: stretch;
 			background-color: rgba(0, 128, 0, 0.111);
 			padding: 10px 20px;
+			cursor: pointer;
+			transition: all 150ms ease-in-out;
 
 			.registerPhoto {
 				filter: sepia(1) hue-rotate(51deg) contrast(0.9) saturate(1.5);
@@ -74,6 +76,11 @@
 			p {
 				word-break: break-word;
 				margin-top: 10px;
+			}
+
+			&:hover {
+				border: 2px solid green;
+				padding: 15px 25px;
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import menu from '@/styles/Menu.module.css';
 import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 import { CharTerminal } from './CharTerminal';
+import Plate from '@/assets/svgs/placa.svg';
 
 export default function Home() {
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
@@ -97,14 +98,15 @@ export default function Home() {
 					rel="stylesheet"
 				></link>
 			</Head>
-			{/* <div className={styles.scanlines} /> */}
+			<div className={styles.scanlines} />
 			<main className={styles.main}>
-				<h1>Welcome back Morty@B-308</h1>
-				<TypeAnimation
-					style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
-					//className={login.profileName}
-					sequence={[
-						`
+				<Image src={Plate} width={300} height={300} className={styles.plate} />
+				<div style={{ zIndex: 2 }}>
+					<h1>Welcome back Morty@B-308</h1>
+					<TypeAnimation
+						style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
+						sequence={[
+							`
 						ᗩᒪᒪᓰᘉ ᕼᗩᘻᑘSᕴᗩᖻᖽᐸᓰᑢᕼᓰᖽᐸ\n
 						ᗩᒪSᓰᕴ’ᓰᖽᐸᑘᘉᗩᖶᗩ ᘻᗩSᖽᐸᕼᗩSᕵᗩ\n
 						...ᖽᐸᑘᖶᓰᑢᕼᓰᖻ\n
@@ -112,49 +114,54 @@ export default function Home() {
 						ᏰᏬᏕፈᏗᏁᎴᎧ ፈᏒᎥᎷᎥᏁᏗᏝᏋᏕ\n
 						...\n
 						∀`,
-						() => {
-							setAutoLogWritting(false);
-						},
-					]}
-					speed={99}
-					cursor={false}
-					repeat={1}
-				/>
+							() => {
+								setAutoLogWritting(false);
+							},
+						]}
+						speed={99}
+						cursor={false}
+						repeat={1}
+					/>
 
-				{!autoLogWritting && (
-					<>
-						<div>
-							<p style={{ marginTop: '14px' }}>================ criminals ==================</p>
-							{options.map(
-								(option) =>
-									option.value !== options.length - 1 && (
-										<div
-											style={{ marginTop: '14px' }}
-											id={'menuOption' + option.value}
-											key={option.value}
-											className={selectedOption === option.value ? menu.menuSelectedOption : ''}
-										>
-											| {selectedOption === option.value ? `> ${option.name}` : option.name} |
-										</div>
-									)
-							)}
-							<p style={{ marginTop: '14px' }}>=============================================</p>
-							{options.map(
-								(option) =>
-									option.value === options.length - 1 && (
-										<div
-											style={{ marginTop: '14px' }}
-											id={'menuOption' + option.value}
-											key={option.value}
-											className={selectedOption === option.value ? menu.menuSelectedOption : ''}
-										>
-											{selectedOption === option.value ? `> ${option.name}` : option.name}
-										</div>
-									)
-							)}
-						</div>
-					</>
-				)}
+					{!autoLogWritting && (
+						<>
+							<div>
+								<p style={{ marginTop: '14px' }}>================ criminals ==================</p>
+								{options.map(
+									(option) =>
+										option.value !== options.length - 1 && (
+											<div
+												style={{ marginTop: '14px' }}
+												id={'menuOption' + option.value}
+												key={option.value}
+												className={
+													selectedOption === option.value ? menu.menuSelectedOption : ''
+												}
+											>
+												| {selectedOption === option.value ? `> ${option.name}` : option.name} |
+											</div>
+										)
+								)}
+								<p style={{ marginTop: '14px' }}>=============================================</p>
+								{options.map(
+									(option) =>
+										option.value === options.length - 1 && (
+											<div
+												style={{ marginTop: '14px' }}
+												id={'menuOption' + option.value}
+												key={option.value}
+												className={
+													selectedOption === option.value ? menu.menuSelectedOption : ''
+												}
+											>
+												{selectedOption === option.value ? `> ${option.name}` : option.name}
+											</div>
+										)
+								)}
+							</div>
+						</>
+					)}
+				</div>
 
 				<CharTerminal visible={charTerminalVisible} setVisible={setCharTerminalVisible} />
 			</main>

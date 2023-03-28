@@ -31,7 +31,7 @@ export default function Home() {
 		event.preventDefault();
 
 		// Si la contraseña ingresada no coincide se añadirá el registro a la lista en formato de cascada
-		if (password !== 'soyinvisible') {
+		if (password !== '123456') {
 			setAutoLogWritting(true);
 			const textContainer = document.getElementById('textContainer');
 			textContainer.innerHTML =
@@ -79,7 +79,7 @@ export default function Home() {
 				gradient={false}
 			>
 			</Marquee> */}
-			{/* <div className={styles.scanlines} /> */}
+			<div className={styles.scanlines} />
 			<main className={styles.main}>
 				<div className={login.parentContainer} ref={boxRef}>
 					<h1 className={login.profileName}>Rptec RAID BIOS v7.4</h1>

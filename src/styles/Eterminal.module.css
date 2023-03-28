@@ -57,6 +57,8 @@
   align-content: stretch;
   background-color: rgba(0, 128, 0, 0.111);
   padding: 10px 20px;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
 }
 .windowContainer .registerContainer .register .registerPhoto {
   filter: sepia(1) hue-rotate(51deg) contrast(0.9) saturate(1.5);
@@ -65,6 +67,10 @@
 .windowContainer .registerContainer .register p {
   word-break: break-word;
   margin-top: 10px;
+}
+.windowContainer .registerContainer .register:hover {
+  border: 2px solid green;
+  padding: 15px 25px;
 }
 
 /*# sourceMappingURL=Eterminal.module.css.map */
