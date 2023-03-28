@@ -1,0 +1,69 @@
+.windowContainer {
+  position: fixed;
+  width: 400px;
+  height: auto;
+  border: 6px solid green;
+  right: 60px;
+  transition: all 250ms ease-in-out;
+  padding: 15px 20px;
+  background-color: rgba(17, 78, 17, 0.909);
+  overflow-y: auto;
+}
+.windowContainer::-webkit-scrollbar {
+  width: 5px;
+  padding-right: 20px;
+  border-radius: 20px;
+}
+.windowContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.windowContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(222, 255, 205);
+}
+.windowContainer .header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  background-color: rgb(0, 30, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.windowContainer .header .closeButton {
+  cursor: pointer;
+  padding: 10px;
+}
+.windowContainer .header .closeButton:hover {
+  color: #77ff90;
+}
+.windowContainer .header h3 {
+  vertical-align: middle;
+}
+.windowContainer .detailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+.windowContainer .detailsContainer .imageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.windowContainer .detailsContainer .imageContainer .imagePhoto {
+  filter: sepia(1) hue-rotate(51deg) contrast(0.9) saturate(1.5);
+  opacity: 0.8;
+}
+.windowContainer .detailsContainer .detailRow {
+  margin-bottom: 14px;
+}
+
+/*# sourceMappingURL=CharTerminal.module.css.map */

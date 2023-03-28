@@ -53,10 +53,19 @@
 
 			.paginationButton {
 				cursor: pointer;
+				padding: 10px;
 
 				&:hover {
 					color: #77ff90;
 				}
+			}
+		}
+		.closeButton {
+			cursor: pointer;
+			padding: 5px;
+
+			&:hover {
+				color: #77ff90;
 			}
 		}
 	}

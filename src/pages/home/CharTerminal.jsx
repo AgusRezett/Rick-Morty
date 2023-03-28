@@ -6,11 +6,23 @@ import eterminal from '../../styles/Eterminal.module.css';
 // Components
 import Image from 'next/image';
 import axios from 'axios';
+import { CharDetailsCard } from './CharDetailsCard';
 
 // Functions
 
 export const CharTerminal = ({ visible, setVisible }) => {
 	const [characters, setCharacters] = useState([]);
+	const [selectedCharacterId, setSelectedCharacterId] = useState();
+	const [charDetailsCardVisible, setCharDetailsCardVisible] = useState(false);
+
+	const openCharCard = (char) => {
+		setSelectedCharacterId(char);
+		setCharDetailsCardVisible(true);
+	};
+
+	const closeWindow = () => {
+		setVisible(false);
+	};
 
 	const fetchNextPage = () => {
 		console.log(characters.info.next);
@@ -46,7 +58,9 @@ export const CharTerminal = ({ visible, setVisible }) => {
 				<div className={eterminal.pagination}>
 					<span
 						className={
-							characters.info.prev ? eterminal.paginationButton : eterminal.paginationButtonDisabled
+							characters.info && characters.info.prev
+								? eterminal.paginationButton
+								: eterminal.paginationButtonDisabled
 						}
 						onClick={fetchPrevPage}
 					>
@@ -54,13 +68,18 @@ export const CharTerminal = ({ visible, setVisible }) => {
 					</span>
 					<span
 						className={
-							characters.info.next ? eterminal.paginationButton : eterminal.paginationButtonDisabled
+							characters.info && characters.info.next
+								? eterminal.paginationButton
+								: eterminal.paginationButtonDisabled
 						}
 						onClick={fetchNextPage}
 					>
 						{'>>'}
 					</span>
 				</div>
+				<span onClick={closeWindow} className={eterminal.closeButton}>
+					X
+				</span>
 			</div>
 			<div className={eterminal.registerContainer}>
 				{characters.results &&
@@ -71,6 +90,7 @@ export const CharTerminal = ({ visible, setVisible }) => {
 								backgroundColor:
 									char.status === 'Dead' ? '#4b000073' : char.status === 'unknown' && '#005857d9',
 							}}
+							onClick={() => openCharCard(char)}
 						>
 							<Image
 								src={char.image}
@@ -95,6 +115,11 @@ export const CharTerminal = ({ visible, setVisible }) => {
 						</div>
 					))}
 			</div>
+			<CharDetailsCard
+				visible={charDetailsCardVisible}
+				setVisible={setCharDetailsCardVisible}
+				charInfo={selectedCharacterId}
+			/>
 		</div>
 	);
 };

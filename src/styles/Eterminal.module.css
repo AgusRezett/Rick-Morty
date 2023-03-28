@@ -49,8 +49,16 @@
 }
 .windowContainer .header .pagination .paginationButton {
   cursor: pointer;
+  padding: 10px;
 }
 .windowContainer .header .pagination .paginationButton:hover {
+  color: #77ff90;
+}
+.windowContainer .header .closeButton {
+  cursor: pointer;
+  padding: 5px;
+}
+.windowContainer .header .closeButton:hover {
   color: #77ff90;
 }
 .windowContainer .registerContainer {
