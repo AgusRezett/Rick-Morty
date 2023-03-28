@@ -8,12 +8,12 @@
 	border: 6px solid green;
 	right: 60px;
 
-	transition: all 250ms ease-in-out;
+	transition: all 100ms ease-in-out;
 
 	padding: 15px 20px;
 	background-color: rgba(17, 78, 17, 0.556);
 
-	overflow-y: scroll;
+	overflow-y: auto;
 
 	&::-webkit-scrollbar {
 		width: 5px;
@@ -53,7 +53,7 @@
 
 			.paginationButton {
 				cursor: pointer;
-				padding: 10px;
+				padding: 5px;
 
 				&:hover {
 					color: #77ff90;

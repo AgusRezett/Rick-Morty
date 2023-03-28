@@ -7,6 +7,7 @@ import eterminal from '../../styles/Eterminal.module.css';
 import Image from 'next/image';
 import axios from 'axios';
 import { CharDetailsCard } from './CharDetailsCard';
+import Draggable from 'react-draggable';
 
 // Functions
 

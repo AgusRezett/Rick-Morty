@@ -3,11 +3,12 @@
   width: 400px;
   height: auto;
   border: 6px solid green;
-  right: 60px;
-  transition: all 250ms ease-in-out;
+  right: 150px;
   padding: 15px 20px;
   background-color: rgba(17, 78, 17, 0.909);
+  transition: all 100ms ease-in-out;
   overflow-y: auto;
+  z-index: 3;
 }
 .windowContainer::-webkit-scrollbar {
   width: 5px;
@@ -34,7 +35,7 @@
 }
 .windowContainer .header .closeButton {
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
 }
 .windowContainer .header .closeButton:hover {
   color: #77ff90;
