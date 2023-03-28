@@ -12,6 +12,22 @@ import axios from 'axios';
 export const CharTerminal = ({ visible, setVisible }) => {
 	const [characters, setCharacters] = useState([]);
 
+	const fetchNextPage = () => {
+		console.log(characters.info.next);
+		axios.get(characters.info.next).then((res) => {
+			setCharacters(res.data);
+		});
+	};
+
+	const fetchPrevPage = () => {
+		axios
+			.get(characters.info.prev)
+			.then((res) => {
+				setCharacters(res.data);
+			})
+			.catch((err) => {});
+	};
+
 	useEffect(() => {
 		axios.get('https://rickandmortyapi.com/api/character').then((res) => {
 			setCharacters(res.data);
@@ -27,8 +43,25 @@ export const CharTerminal = ({ visible, setVisible }) => {
 			</div>
 			<div className={eterminal.header} style={{ position: 'absolute' }}>
 				<h3>@_criminalsDb-Terminal</h3>
+				<div className={eterminal.pagination}>
+					<span
+						className={
+							characters.info.prev ? eterminal.paginationButton : eterminal.paginationButtonDisabled
+						}
+						onClick={fetchPrevPage}
+					>
+						{'<<'}
+					</span>
+					<span
+						className={
+							characters.info.next ? eterminal.paginationButton : eterminal.paginationButtonDisabled
+						}
+						onClick={fetchNextPage}
+					>
+						{'>>'}
+					</span>
+				</div>
 			</div>
-			<div id="content"></div>
 			<div className={eterminal.registerContainer}>
 				{characters.results &&
 					characters.results.map((char) => (

@@ -28,9 +28,30 @@
   left: 0;
   padding: 10px 20px;
   background-color: rgb(0, 30, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .windowContainer .header h3 {
   vertical-align: middle;
+}
+.windowContainer .header .pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 50px;
+}
+.windowContainer .header .pagination .paginationButtonDisabled {
+  cursor: pointer;
+  color: #177a29 !important;
+}
+.windowContainer .header .pagination .paginationButton {
+  cursor: pointer;
+}
+.windowContainer .header .pagination .paginationButton:hover {
+  color: #77ff90;
 }
 .windowContainer .registerContainer {
   width: 100%;
@@ -55,7 +76,7 @@
   margin-bottom: 30px;
   flex-wrap: wrap;
   align-content: stretch;
-  background-color: rgba(0, 128, 0, 0.111);
+  background-color: rgba(0, 128, 0, 0.303);
   padding: 10px 20px;
   cursor: pointer;
   transition: all 150ms ease-in-out;
