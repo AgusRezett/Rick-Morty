@@ -92,12 +92,14 @@ export const CharTerminal = ({ visible, setVisible }) => {
 									char.status === 'Dead' ? '#4b000073' : char.status === 'unknown' && '#005857d9',
 							}}
 							onClick={() => openCharCard(char)}
+							key={char.id}
 						>
 							<Image
 								src={char.image}
 								width={100}
 								height={100}
 								className={eterminal.registerPhoto}
+								alt={`${char.name} image photo`}
 								style={{
 									filter:
 										char.status === 'Dead'

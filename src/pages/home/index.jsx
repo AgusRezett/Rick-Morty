@@ -19,13 +19,40 @@ export default function Home() {
 	const router = useRouter();
 
 	const [charTerminalVisible, setCharTerminalVisible] = useState(false);
+	const [charTerminalTypeOf, setCharTerminalTypeOf] = useState(1);
 
 	const options = [
-		{ value: 0, name: 'Show all', action: () => setCharTerminalVisible(!charTerminalVisible) },
+		{
+			value: 0,
+			name: 'Show all',
+			action: () => toggleCharTerminal(1),
+		},
 		{ value: 1, name: 'List selected' },
-		{ value: 2, name: 'Search' },
+		{
+			value: 2,
+			name: 'Search',
+			action: () => toggleCharTerminal(2),
+		},
 		{ value: 3, name: 'Exit console', action: router.back },
 	];
+
+	const toggleCharTerminal = (typeOf) => {
+		if (charTerminalVisible && charTerminalTypeOf === typeOf) {
+			setCharTerminalVisible(false);
+			console.log(1);
+		} else if (charTerminalVisible && charTerminalTypeOf !== typeOf) {
+			setCharTerminalVisible(false);
+			setTimeout(() => {
+				setCharTerminalTypeOf(typeOf);
+				setCharTerminalVisible(true);
+			}, 200);
+			console.log(2);
+		} else if (!charTerminalVisible) {
+			setCharTerminalTypeOf(typeOf);
+			setCharTerminalVisible(true);
+			console.log(3);
+		}
+	};
 
 	const handleSelectOption = (option) => {
 		setSelectedOption(option);
@@ -100,7 +127,7 @@ export default function Home() {
 			</Head>
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
-				<Image src={Plate} width={300} height={300} className={styles.plate} />
+				<Image src={Plate} width={300} height={300} className={styles.plate} alt={'official plate'} />
 				<div style={{ zIndex: 2 }}>
 					<h1>Welcome back Morty@B-308</h1>
 					<TypeAnimation
@@ -163,7 +190,11 @@ export default function Home() {
 					)}
 				</div>
 
-				<CharTerminal visible={charTerminalVisible} setVisible={setCharTerminalVisible} />
+				<CharTerminal
+					visible={charTerminalVisible}
+					setVisible={setCharTerminalVisible}
+					typeOf={charTerminalTypeOf}
+				/>
 			</main>
 		</>
 	);

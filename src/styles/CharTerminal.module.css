@@ -59,12 +59,47 @@
   height: auto;
   margin-bottom: 20px;
 }
+.windowContainer .detailsContainer .imageContainer div {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.6;
+}
 .windowContainer .detailsContainer .imageContainer .imagePhoto {
+  z-index: 1;
   filter: sepia(1) hue-rotate(51deg) contrast(0.9) saturate(1.5);
   opacity: 0.8;
 }
 .windowContainer .detailsContainer .detailRow {
   margin-bottom: 14px;
+}
+.windowContainer .detailsContainer .searchingStatusRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.windowContainer .detailsContainer .searchingStatusRow .searchingStatusContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #21d943;
+  cursor: pointer;
+}
+.windowContainer .detailsContainer .searchingStatusRow .searchingStatusContainer .searchingStatusContent {
+  width: 0px;
+  height: 0px;
+  background-color: #21d943;
+  transition: all 150ms ease-in-out;
+}
+.windowContainer .detailsContainer .searchingStatusRow .searchingStatusContainer .active {
+  width: 6px;
+  height: 6px;
+}
+.windowContainer .detailsContainer .searchingStatusRow p {
+  margin-left: 5px;
 }
 
 /*# sourceMappingURL=CharTerminal.module.css.map */
