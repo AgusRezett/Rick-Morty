@@ -10,19 +10,14 @@ import menu from '@/styles/Menu.module.css';
 import axios from 'axios';
 import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
-import { CharTerminal } from './CharTerminal';
+import CharTerminal from './CharTerminal';
 import Plate from '@/assets/svgs/placa.svg';
 
 // Redux
 import { connect } from 'react-redux';
 import { setCharacters } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
 
-function Home(props) {
-	const { reduxState, setCharacters } = props;
-
-	const [name, setName] = useState('');
-
+function Home({ setCharacters, favourites }) {
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
 	const [selectedOption, setSelectedOption] = useState(0);
 	const [blockedMenu, setBlockedMenu] = useState(false);
@@ -30,8 +25,6 @@ function Home(props) {
 
 	const [charTerminalVisible, setCharTerminalVisible] = useState(false);
 	const [charTerminalTypeOf, setCharTerminalTypeOf] = useState(1);
-
-	//const dispatch = useDispatch();
 
 	const options = [
 		{
@@ -145,11 +138,8 @@ function Home(props) {
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
 				<Image src={Plate} width={300} height={300} className={styles.plate} alt={'official plate'} priority />
-				<div style={{ zIndex: 2 }}>
+				<div style={{ zIndex: 2, width: '100%' }}>
 					<h1>Welcome back Morty@B-308</h1>
-					<input type="name" value={name} onChange={(e) => setName(e.target.value)} />
-					<button onClick={() => setCharacters(name)}>Cambiar nombre</button>
-
 					<TypeAnimation
 						style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
 						sequence={[
@@ -172,7 +162,8 @@ function Home(props) {
 
 					{!autoLogWritting && (
 						<>
-							<div>
+							<div style={{ width: '100%' }}>
+								<p style={{ wordBreak: 'break-all' }}>{favourites.map((char) => char.name)}</p>
 								<p style={{ marginTop: '14px' }}>================ criminals ==================</p>
 								{options.map(
 									(option) =>
@@ -210,18 +201,19 @@ function Home(props) {
 					)}
 				</div>
 
-				{/* <CharTerminal
+				<CharTerminal
 					visible={charTerminalVisible}
 					setVisible={setCharTerminalVisible}
 					typeOf={charTerminalTypeOf}
-				/> */}
+				/>
 			</main>
 		</>
 	);
 }
 
 const mapStateToProps = (state) => ({
-	reduxState: state.main,
+	characters: state.main.characters,
+	favourites: state.main.favourites,
 });
 
 const mapDispatchToProps = {

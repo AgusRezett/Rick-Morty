@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // Styles
 import eterminal from '../../styles/Eterminal.module.css';
@@ -6,26 +6,15 @@ import eterminal from '../../styles/Eterminal.module.css';
 // Components
 import Image from 'next/image';
 import axios from 'axios';
-import { CharDetailsCard } from './CharDetailsCard';
+import CharDetailsCard from './CharDetailsCard';
 
 // Redux
-//import { connect } from 'react-redux';
-//import { removeFav } from '../../redux/actions/actions';
+import { connect } from 'react-redux';
+import { setCharacters, addFavourite } from '../../redux/actions';
 
-import { useSelector } from 'react-redux';
-
-export const CharTerminal = ({ visible, setVisible, myFavorites, removeFav }) => {
-	//const [characters, setCharacters] = useState([]);
-	//const { characters } = useSelector((state) => state);
-	//const [favoriteCharacters, setFavoriteCharacters] = useState([]);
+function CharTerminal({ visible, setVisible, typeOf, characters, setCharacters }) {
 	const [selectedCharacterId, setSelectedCharacterId] = useState();
 	const [charDetailsCardVisible, setCharDetailsCardVisible] = useState(false);
-
-	/* const onDeleteFav = (id) => {
-		setFavoriteCharacters((oldChars) => {
-			return oldChars.filter((character) => character.id !== id);
-		});
-	}; */
 
 	const openCharCard = (char) => {
 		setSelectedCharacterId(char);
@@ -55,7 +44,7 @@ export const CharTerminal = ({ visible, setVisible, myFavorites, removeFav }) =>
 		<div style={{ right: !visible && '-100%' }} className={eterminal.windowContainer}>
 			<div className={eterminal.header} style={{ position: !visible && 'absolute', right: !visible && '-100%' }}>
 				<h3>@_criminalsDb-Terminal</h3>
-				<p>{JSON.stringify(myFavorites)}</p>
+				{/* <p>{JSON.stringify(myFavorites)}</p> */}
 			</div>
 			<div className={eterminal.header} style={{ position: 'absolute' }}>
 				<h3>@_criminalsDb-Terminal</h3>
@@ -92,7 +81,7 @@ export const CharTerminal = ({ visible, setVisible, myFavorites, removeFav }) =>
 							className={eterminal.register}
 							style={{
 								backgroundColor:
-									char.status === 'Dead' ? '#4b000073' : char.status === 'unknown' && '#005857d9',
+									char.status === 'Dead' ? '#4b000099' : char.status === 'unknown' && '#00585799',
 							}}
 							onClick={() => openCharCard(char)}
 							key={char.id}
@@ -125,25 +114,19 @@ export const CharTerminal = ({ visible, setVisible, myFavorites, removeFav }) =>
 				visible={charDetailsCardVisible}
 				setVisible={setCharDetailsCardVisible}
 				charInfo={selectedCharacterId}
-				//onDeleteFav={onDeleteFav}
-				removeFav={removeFav}
-				myFavorites={myFavorites}
 			/>
 		</div>
 	);
+}
+
+const mapStateToProps = (state) => ({
+	characters: state.main.characters,
+	favourites: state.main.favourites,
+});
+
+const mapDispatchToProps = {
+	setCharacters: setCharacters,
+	addFavourite: addFavourite,
 };
 
-export default CharTerminal;
-
-/* function mapState(state) {
-	return {
-		myFavorites: state.myFavorites,
-	};
-}
-function mapDispatch(dispatch) {
-	return {
-		removeFav: (id) => dispatch(removeFav(id)),
-	};
-}
-
-export default connect(mapState, mapDispatch)(CharTerminal); */
+export default connect(mapStateToProps, mapDispatchToProps)(CharTerminal);

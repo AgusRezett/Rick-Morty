@@ -3,9 +3,9 @@ import * as t from '../types';
 const main = (
 	state = {
 		characters: [],
+		favourites: [],
 		loading: false,
 		error: null,
-		todos: [],
 	},
 	action
 ) => {
@@ -14,6 +14,29 @@ const main = (
 			return {
 				...state,
 				characters: action.payload,
+			};
+		case t.ADD_FAVOURITE:
+			console.log('añadir');
+			return {
+				...state,
+				favourites: [...state.favourites, action.payload],
+			};
+		case t.REMOVE_FAVOURITE:
+			console.log('eliminar');
+			const newArray = state.favourites.filter((char) => {
+				return char.id !== action.payload;
+			});
+			console.log(newArray);
+			/* console.log('removee');
+			const onDeleteFav = (id) => {
+		setFavoriteCharacters((oldChars) => {
+			return oldChars.filter((character) => character.id !== id);
+		});
+	}; */
+
+			return {
+				...state,
+				favourites: newArray,
 			};
 		default:
 			return { ...state };

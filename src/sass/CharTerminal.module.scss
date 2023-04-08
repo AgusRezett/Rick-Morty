@@ -8,7 +8,7 @@
 	right: 150px;
 
 	padding: 15px 20px;
-	background-color: rgba(17, 78, 17, 0.909);
+	background-color: rgba(0, 95, 0, 0.9);
 	transition: all 100ms ease-in-out;
 
 	overflow-y: auto;
@@ -68,6 +68,7 @@
 			}
 
 			.imagePhoto {
+				transition: all 150ms ease-in-out;
 				z-index: 1;
 				filter: sepia(1) hue-rotate(51deg) contrast(0.9) saturate(1.5);
 				opacity: 0.8;

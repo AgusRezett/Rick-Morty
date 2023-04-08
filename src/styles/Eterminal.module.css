@@ -7,8 +7,9 @@
   right: 60px;
   transition: all 100ms ease-in-out;
   padding: 15px 20px;
-  background-color: rgba(17, 78, 17, 0.556);
+  background-color: rgba(17, 78, 17, 0.9);
   overflow-y: auto;
+  z-index: 4;
 }
 .windowContainer::-webkit-scrollbar {
   width: 5px;
@@ -84,7 +85,7 @@
   margin-bottom: 30px;
   flex-wrap: wrap;
   align-content: stretch;
-  background-color: rgba(0, 128, 0, 0.303);
+  background-color: rgba(0, 95, 0, 0.6);
   padding: 10px 20px;
   cursor: pointer;
   transition: all 150ms ease-in-out;

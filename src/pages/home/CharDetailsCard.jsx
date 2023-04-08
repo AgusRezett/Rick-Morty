@@ -12,10 +12,9 @@ import { Rings } from 'react-loader-spinner';
 
 // Redux
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
+import { addFavourite, removeFavourite } from '../../redux/actions';
 
-export const CharDetailsCard = (props) => {
-	const { visible, setVisible, charInfo, myFavorites, addFav, removeFav, getAllBands } = props;
+const CharDetailsCard = ({ visible, setVisible, charInfo, favourites, addFavourite, removeFavourite }) => {
 	const [isFav, setIsFav] = useState(false);
 
 	const closeWindow = () => {
@@ -23,18 +22,25 @@ export const CharDetailsCard = (props) => {
 	};
 
 	const handleFavorite = () => {
-		console.log('hols');
-		getAllBands();
-		//isFav ? removeFav(charInfo.id) : addFav(charInfo);
+		if (isFav) {
+			setIsFav(false);
+			removeFavourite(charInfo.id);
+		} else {
+			setIsFav(true);
+			addFavourite(charInfo);
+		}
 	};
 
-	/* useEffect(() => {
-		myFavorites?.forEach((fav) => {
-			if (fav.id === charInfo.id) {
-				setIsFav(true);
-			}
-		});
-	}, [myFavorites]); */
+	useEffect(() => {
+		setIsFav(false);
+		favourites &&
+			charInfo &&
+			favourites.forEach((fav) => {
+				if (fav.id === charInfo.id) {
+					setIsFav(true);
+				}
+			});
+	}, [favourites, charInfo]);
 
 	const consoleWarn = console.warn;
 	const SUPPRESSED_WARNINGS = ['Warning: findDOMNode is deprecated in StrictMode.'];
@@ -58,22 +64,25 @@ export const CharDetailsCard = (props) => {
 				{charInfo && (
 					<div className={charterminal.detailsContainer}>
 						<div className={charterminal.imageContainer}>
-							<Rings
-								height="150"
-								width="150"
-								color="#4fa94d"
-								radius="6"
-								wrapperStyle={{}}
-								wrapperClass=""
-								visible={true}
-								ariaLabel="rings-loading"
-							/>
+							{isFav && (
+								<Rings
+									height="150"
+									width="150"
+									color="#4fa94d"
+									radius="6"
+									wrapperStyle={{}}
+									wrapperClass=""
+									visible={true}
+									ariaLabel="rings-loading"
+								/>
+							)}
 							<Image
 								src={charInfo.image}
 								width={150}
 								height={150}
 								className={charterminal.imagePhoto}
 								alt={`${charInfo.name} image photo`}
+								style={{ borderRadius: isFav && '100%' }}
 							/>
 						</div>
 						<h2 className={charterminal.detailRow}>{charInfo.name}</h2>
@@ -106,31 +115,14 @@ export const CharDetailsCard = (props) => {
 	);
 };
 
-export const mapStateToProps = (state) => {
-	return {
-		bands: state.bands,
-	};
-};
+const mapStateToProps = (state) => ({
+	characters: state.main.characters,
+	favourites: state.main.favourites,
+});
 
-export const mapDispatchToProps = (dispatch) => {
-	return {
-		getAllBands: () => dispatch(actions.getAllBands()),
-	};
+const mapDispatchToProps = {
+	addFavourite: addFavourite,
+	removeFavourite: removeFavourite,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharDetailsCard);
-
-/* export const mapStateToProps = (state) => {
-	return {
-		myFavorites: state.myFavorites,
-	};
-};
-
-export const mapDispatchToProps = (dispatch) => {
-	return {
-		addFav: (character) => dispatch(actions.addFav(character)),
-		removeFav: (id) => dispatch(actions.removeFav(id)),
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CharDetailsCard); */
