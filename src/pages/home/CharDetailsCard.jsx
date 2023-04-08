@@ -10,12 +10,31 @@ import axios from 'axios';
 import Draggable from 'react-draggable';
 import { Rings } from 'react-loader-spinner';
 
-// Functions
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions';
 
-export const CharDetailsCard = ({ visible, setVisible, charInfo }) => {
+export const CharDetailsCard = (props) => {
+	const { visible, setVisible, charInfo, myFavorites, addFav, removeFav, getAllBands } = props;
+	const [isFav, setIsFav] = useState(false);
+
 	const closeWindow = () => {
 		setVisible(false);
 	};
+
+	const handleFavorite = () => {
+		console.log('hols');
+		getAllBands();
+		//isFav ? removeFav(charInfo.id) : addFav(charInfo);
+	};
+
+	/* useEffect(() => {
+		myFavorites?.forEach((fav) => {
+			if (fav.id === charInfo.id) {
+				setIsFav(true);
+			}
+		});
+	}, [myFavorites]); */
 
 	const consoleWarn = console.warn;
 	const SUPPRESSED_WARNINGS = ['Warning: findDOMNode is deprecated in StrictMode.'];
@@ -72,9 +91,9 @@ export const CharDetailsCard = ({ visible, setVisible, charInfo }) => {
 						<p className={charterminal.detailRow}>Origin: {charInfo.origin.name}</p>
 						<p className={charterminal.detailRow}>Last seen: {charInfo.location.name}</p>
 						<span className={charterminal.searchingStatusRow}>
-							<div className={charterminal.searchingStatusContainer}>
+							<div onClick={handleFavorite} className={charterminal.searchingStatusContainer}>
 								<div
-									className={`${charterminal.searchingStatusContent} ${charterminal.active}`}
+									className={`${charterminal.searchingStatusContent} ${isFav && charterminal.active}`}
 									/* style={{ width: '6px', height: '6px' }} */
 								></div>
 							</div>
@@ -86,3 +105,32 @@ export const CharDetailsCard = ({ visible, setVisible, charInfo }) => {
 		</Draggable>
 	);
 };
+
+export const mapStateToProps = (state) => {
+	return {
+		bands: state.bands,
+	};
+};
+
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		getAllBands: () => dispatch(actions.getAllBands()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharDetailsCard);
+
+/* export const mapStateToProps = (state) => {
+	return {
+		myFavorites: state.myFavorites,
+	};
+};
+
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		addFav: (character) => dispatch(actions.addFav(character)),
+		removeFav: (id) => dispatch(actions.removeFav(id)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharDetailsCard); */

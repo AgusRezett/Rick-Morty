@@ -7,12 +7,8 @@ import styles from '@/styles/Home.module.css';
 
 // Components
 import Marquee from 'react-fast-marquee';
-import CopMorty from '../assets/images/profile.png';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-
 import { TypeAnimation } from 'react-type-animation';
-import { Prompt } from 'next/font/google';
 
 export default function Home() {
 	// Estado que maneja la visibilidad de escritura del typing automático

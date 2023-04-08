@@ -7,14 +7,25 @@ import eterminal from '../../styles/Eterminal.module.css';
 import Image from 'next/image';
 import axios from 'axios';
 import { CharDetailsCard } from './CharDetailsCard';
-import Draggable from 'react-draggable';
 
-// Functions
+// Redux
+//import { connect } from 'react-redux';
+//import { removeFav } from '../../redux/actions/actions';
 
-export const CharTerminal = ({ visible, setVisible }) => {
-	const [characters, setCharacters] = useState([]);
+import { useSelector } from 'react-redux';
+
+export const CharTerminal = ({ visible, setVisible, myFavorites, removeFav }) => {
+	//const [characters, setCharacters] = useState([]);
+	//const { characters } = useSelector((state) => state);
+	//const [favoriteCharacters, setFavoriteCharacters] = useState([]);
 	const [selectedCharacterId, setSelectedCharacterId] = useState();
 	const [charDetailsCardVisible, setCharDetailsCardVisible] = useState(false);
+
+	/* const onDeleteFav = (id) => {
+		setFavoriteCharacters((oldChars) => {
+			return oldChars.filter((character) => character.id !== id);
+		});
+	}; */
 
 	const openCharCard = (char) => {
 		setSelectedCharacterId(char);
@@ -26,7 +37,6 @@ export const CharTerminal = ({ visible, setVisible }) => {
 	};
 
 	const fetchNextPage = () => {
-		console.log(characters.info.next);
 		axios.get(characters.info.next).then((res) => {
 			setCharacters(res.data);
 		});
@@ -41,25 +51,18 @@ export const CharTerminal = ({ visible, setVisible }) => {
 			.catch((err) => {});
 	};
 
-	useEffect(() => {
-		axios.get('https://rickandmortyapi.com/api/character').then((res) => {
-			setCharacters(res.data);
-		});
-
-		return () => {};
-	}, []);
-
 	return (
 		<div style={{ right: !visible && '-100%' }} className={eterminal.windowContainer}>
 			<div className={eterminal.header} style={{ position: !visible && 'absolute', right: !visible && '-100%' }}>
 				<h3>@_criminalsDb-Terminal</h3>
+				<p>{JSON.stringify(myFavorites)}</p>
 			</div>
 			<div className={eterminal.header} style={{ position: 'absolute' }}>
 				<h3>@_criminalsDb-Terminal</h3>
 				<div className={eterminal.pagination}>
 					<span
 						className={
-							characters.info && characters.info.prev
+							characters?.info && characters.info.prev
 								? eterminal.paginationButton
 								: eterminal.paginationButtonDisabled
 						}
@@ -69,7 +72,7 @@ export const CharTerminal = ({ visible, setVisible }) => {
 					</span>
 					<span
 						className={
-							characters.info && characters.info.next
+							characters?.info && characters.info.next
 								? eterminal.paginationButton
 								: eterminal.paginationButtonDisabled
 						}
@@ -83,8 +86,8 @@ export const CharTerminal = ({ visible, setVisible }) => {
 				</span>
 			</div>
 			<div className={eterminal.registerContainer}>
-				{characters.results &&
-					characters.results.map((char) => (
+				{characters?.results &&
+					characters.results?.map((char) => (
 						<div
 							className={eterminal.register}
 							style={{
@@ -122,7 +125,25 @@ export const CharTerminal = ({ visible, setVisible }) => {
 				visible={charDetailsCardVisible}
 				setVisible={setCharDetailsCardVisible}
 				charInfo={selectedCharacterId}
+				//onDeleteFav={onDeleteFav}
+				removeFav={removeFav}
+				myFavorites={myFavorites}
 			/>
 		</div>
 	);
 };
+
+export default CharTerminal;
+
+/* function mapState(state) {
+	return {
+		myFavorites: state.myFavorites,
+	};
+}
+function mapDispatch(dispatch) {
+	return {
+		removeFav: (id) => dispatch(removeFav(id)),
+	};
+}
+
+export default connect(mapState, mapDispatch)(CharTerminal); */

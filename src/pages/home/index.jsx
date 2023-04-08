@@ -7,12 +7,22 @@ import styles from '@/styles/Home.module.css';
 import menu from '@/styles/Menu.module.css';
 
 // Components
+import axios from 'axios';
 import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 import { CharTerminal } from './CharTerminal';
 import Plate from '@/assets/svgs/placa.svg';
 
-export default function Home() {
+// Redux
+import { connect } from 'react-redux';
+import { setCharacters } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+
+function Home(props) {
+	const { reduxState, setCharacters } = props;
+
+	const [name, setName] = useState('');
+
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
 	const [selectedOption, setSelectedOption] = useState(0);
 	const [blockedMenu, setBlockedMenu] = useState(false);
@@ -20,6 +30,8 @@ export default function Home() {
 
 	const [charTerminalVisible, setCharTerminalVisible] = useState(false);
 	const [charTerminalTypeOf, setCharTerminalTypeOf] = useState(1);
+
+	//const dispatch = useDispatch();
 
 	const options = [
 		{
@@ -113,6 +125,14 @@ export default function Home() {
 		someCallback();
 	}, ['Escape']);
 
+	useEffect(() => {
+		axios.get('https://rickandmortyapi.com/api/character').then((res) => {
+			setCharacters(res.data);
+		});
+
+		return () => {};
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -120,16 +140,16 @@ export default function Home() {
 				<meta name="description" content="Henry API proyect" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
-				<link
-					href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"
-					rel="stylesheet"
-				></link>
+				<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"></link>
 			</Head>
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
-				<Image src={Plate} width={300} height={300} className={styles.plate} alt={'official plate'} />
+				<Image src={Plate} width={300} height={300} className={styles.plate} alt={'official plate'} priority />
 				<div style={{ zIndex: 2 }}>
 					<h1>Welcome back Morty@B-308</h1>
+					<input type="name" value={name} onChange={(e) => setName(e.target.value)} />
+					<button onClick={() => setCharacters(name)}>Cambiar nombre</button>
+
 					<TypeAnimation
 						style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
 						sequence={[
@@ -190,12 +210,22 @@ export default function Home() {
 					)}
 				</div>
 
-				<CharTerminal
+				{/* <CharTerminal
 					visible={charTerminalVisible}
 					setVisible={setCharTerminalVisible}
 					typeOf={charTerminalTypeOf}
-				/>
+				/> */}
 			</main>
 		</>
 	);
 }
+
+const mapStateToProps = (state) => ({
+	reduxState: state.main,
+});
+
+const mapDispatchToProps = {
+	setCharacters: setCharacters,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
