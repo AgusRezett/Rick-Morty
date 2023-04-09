@@ -86,6 +86,7 @@ const CharDetailsCard = ({ visible, setVisible, charInfo, favourites, addFavouri
 							/>
 						</div>
 						<h2 className={charterminal.detailRow}>{charInfo.name}</h2>
+						<h3 className={charterminal.detailRow}>{charInfo.status}</h3>
 						<p className={charterminal.detailRow}>Specie: {charInfo.species}</p>
 						<p className={charterminal.detailRow}>
 							Gender:{' '}

@@ -16,13 +16,11 @@ const main = (
 				characters: action.payload,
 			};
 		case t.ADD_FAVOURITE:
-			console.log('añadir');
 			return {
 				...state,
 				favourites: [...state.favourites, action.payload],
 			};
 		case t.REMOVE_FAVOURITE:
-			console.log('eliminar');
 			const newArray = state.favourites.filter((char) => {
 				return char.id !== action.payload;
 			});

@@ -32,11 +32,14 @@ function Home({ setCharacters, favourites }) {
 			name: 'Show all',
 			action: () => toggleCharTerminal(1),
 		},
-		{ value: 1, name: 'List selected' },
+		{
+			value: 1,
+			name: 'List selected',
+			action: () => toggleCharTerminal(2),
+		},
 		{
 			value: 2,
 			name: 'Search',
-			action: () => toggleCharTerminal(2),
 		},
 		{ value: 3, name: 'Exit console', action: router.back },
 	];
@@ -44,18 +47,15 @@ function Home({ setCharacters, favourites }) {
 	const toggleCharTerminal = (typeOf) => {
 		if (charTerminalVisible && charTerminalTypeOf === typeOf) {
 			setCharTerminalVisible(false);
-			console.log(1);
 		} else if (charTerminalVisible && charTerminalTypeOf !== typeOf) {
 			setCharTerminalVisible(false);
 			setTimeout(() => {
 				setCharTerminalTypeOf(typeOf);
 				setCharTerminalVisible(true);
 			}, 200);
-			console.log(2);
 		} else if (!charTerminalVisible) {
 			setCharTerminalTypeOf(typeOf);
 			setCharTerminalVisible(true);
-			console.log(3);
 		}
 	};
 
