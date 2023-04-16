@@ -33,6 +33,7 @@
 		"redux": "^4.2.1",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.2",
-		"sass": "^1.60.0"
+		"sass": "^1.60.0",
+		"use-sound": "^4.0.1"
 	}
 }

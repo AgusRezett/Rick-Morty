@@ -51,9 +51,15 @@ const CharDetailsCard = ({ visible, setVisible, charInfo, favourites, addFavouri
 		}
 	}; */
 
+	const nodeRef = React.useRef(null);
+
 	return (
-		<Draggable defaultPosition={{ x: 0, y: 0 }} position={null} grid={[25, 25]} scale={1}>
-			<div style={{ bottom: !visible ? '-100%' : '100px' }} className={charterminal.windowContainer}>
+		<Draggable nodeRef={nodeRef} defaultPosition={{ x: 0, y: 0 }} position={null} grid={[25, 25]} scale={1}>
+			<div
+				ref={nodeRef}
+				style={{ bottom: !visible ? '-100%' : '100px' }}
+				className={charterminal.windowContainer}
+			>
 				<div className={charterminal.header} style={{ position: 'absolute' }}>
 					<h3>@_criminal@Details</h3>
 

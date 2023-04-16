@@ -84,6 +84,13 @@
   margin-left: 5px;
 }
 
+.searchingStatusFavContainer {
+  top: 20px;
+  right: 20px;
+  margin: 0 !important;
+  scale: 1.8;
+}
+
 .searchingStatusContainerScaled {
   position: absolute;
   z-index: 4;
@@ -109,6 +116,7 @@
   transition: all 150ms ease-in-out;
 }
 .searchingStatusContainer .activeScaled {
+  margin: 0 !important;
   width: 6px;
   height: 6px;
 }

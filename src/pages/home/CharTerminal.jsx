@@ -192,9 +192,21 @@ const SelectedCharacters = ({
 	setCharCardInfo,
 	setCharCardVisible,
 }) => {
-	const openCharCard = (char) => {
-		setCharCardInfo(char);
-		setCharCardVisible(true);
+	const handleFavorite = (char) => {
+		if (favourites.includes(char)) {
+			removeFavourite(char.id);
+		} else {
+			addFavourite(char);
+		}
+	};
+
+	const openCharCard = (char, origin) => {
+		if (!origin.target.className.includes('searchingStatusContainer')) {
+			if (!origin.target.className.includes('searchingStatusContent')) {
+				setCharCardInfo(char);
+				setCharCardVisible(true);
+			}
+		}
 	};
 
 	const closeWindow = () => {
@@ -225,9 +237,20 @@ const SelectedCharacters = ({
 								backgroundColor:
 									char.status === 'Dead' ? '#4b000099' : char.status === 'unknown' && '#00585799',
 							}}
-							onClick={() => openCharCard(char)}
+							onClick={(e) => openCharCard(char, e)}
 							key={char.id}
 						>
+							<div
+								onClick={() => handleFavorite(char)}
+								style={{ border: '2px solid #21d94354' }}
+								className={`${charterminal.searchingStatusContainer} ${charterminal.searchingStatusContainerScaled} ${charterminal.searchingStatusFavContainer}`}
+							>
+								<div
+									className={`${charterminal.searchingStatusContent} ${
+										favourites.includes(char) && charterminal.activeScaled
+									}`}
+								></div>
+							</div>
 							<Image
 								src={char.image}
 								width={100}

@@ -45,13 +45,16 @@ function CharSearcher({
 			: setSelectedSearchChar();
 	}, [searchCharValue]);
 
+	const nodeRef = React.useRef(null);
+
 	return (
-		<Draggable defaultPosition={{ x: 0, y: 0 }} position={null} grid={[25, 25]} scale={1}>
+		<Draggable nodeRef={nodeRef} defaultPosition={{ x: -500, y: 450 }} position={null} grid={[25, 25]} scale={1}>
 			<div
 				style={{ right: !visible && '-100%', width: '600px', height: 'fit-content' }}
 				className={eterminal.windowContainer}
 			>
 				<div
+					ref={nodeRef}
 					className={eterminal.header}
 					style={{ position: !visible && 'absolute', right: !visible && '-100%' }}
 				>
