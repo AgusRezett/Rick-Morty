@@ -42,14 +42,14 @@ const CharDetailsCard = ({ visible, setVisible, charInfo, favourites, addFavouri
 			});
 	}, [favourites, charInfo]);
 
-	const consoleWarn = console.warn;
+	/* const consoleWarn = console.warn;
 	const SUPPRESSED_WARNINGS = ['Warning: findDOMNode is deprecated in StrictMode.'];
 
 	console.warn = function filterWarnings(msg, ...args) {
 		if (!SUPPRESSED_WARNINGS.some((entry) => msg.includes(entry))) {
 			consoleWarn(msg, ...args);
 		}
-	};
+	}; */
 
 	return (
 		<Draggable defaultPosition={{ x: 0, y: 0 }} position={null} grid={[25, 25]} scale={1}>
@@ -104,7 +104,6 @@ const CharDetailsCard = ({ visible, setVisible, charInfo, favourites, addFavouri
 							<div onClick={handleFavorite} className={charterminal.searchingStatusContainer}>
 								<div
 									className={`${charterminal.searchingStatusContent} ${isFav && charterminal.active}`}
-									/* style={{ width: '6px', height: '6px' }} */
 								></div>
 							</div>
 							<p>Active searching</p>

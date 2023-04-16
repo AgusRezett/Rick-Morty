@@ -3,6 +3,7 @@ import * as t from '../types';
 const main = (
 	state = {
 		characters: [],
+		selectedCharCard: {},
 		favourites: [],
 		loading: false,
 		error: null,
@@ -24,17 +25,26 @@ const main = (
 			const newArray = state.favourites.filter((char) => {
 				return char.id !== action.payload;
 			});
-			console.log(newArray);
-			/* console.log('removee');
-			const onDeleteFav = (id) => {
-		setFavoriteCharacters((oldChars) => {
-			return oldChars.filter((character) => character.id !== id);
-		});
-	}; */
 
 			return {
 				...state,
 				favourites: newArray,
+			};
+		case t.SET_CHAR_CARD_VISIBLE:
+			return {
+				...state,
+				selectedCharCard: {
+					...state.selectedCharCard,
+					visible: action.payload,
+				},
+			};
+		case t.SET_CHAR_CARD_INFO:
+			return {
+				...state,
+				selectedCharCard: {
+					...state.selectedCharCard,
+					info: action.payload,
+				},
 			};
 		default:
 			return { ...state };

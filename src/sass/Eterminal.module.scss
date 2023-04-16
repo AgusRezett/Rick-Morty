@@ -41,6 +41,8 @@
 
 		h3 {
 			vertical-align: middle;
+			pointer-events: none;
+			user-select: none;
 		}
 
 		.sortingColumn {
@@ -75,6 +77,26 @@
 				}
 			}
 		}
+
+		.searchCharContainer {
+			@include displayFlex(row, center, center);
+
+			input {
+				width: 60px;
+				height: 25px;
+				margin-left: 5px;
+				border: 2px solid #10601f;
+				//border: none;
+				background: #002900;
+				padding: 0px 15px;
+			}
+
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+			}
+		}
+
 		.closeButton {
 			cursor: pointer;
 			padding: 5px;
@@ -138,7 +160,7 @@
 		align-content: stretch;
 		justify-content: space-between;
 		align-items: flex-start;
-		margin-top: 45px;
+		margin-top: 50px;
 
 		.register {
 			@include displayFlex(column, flex-start, center);
@@ -152,6 +174,7 @@
 			background-color: rgba(0, 95, 0, 0.6);
 			padding: 10px 20px;
 			cursor: pointer;
+			border: 2px solid transparent;
 			transition: all 150ms ease-in-out;
 
 			.registerPhoto {
@@ -165,8 +188,8 @@
 			}
 
 			&:hover {
-				border: 2px solid green;
-				padding: 15px 25px;
+				border: 2px solid #21d9437e;
+				//padding: 15px 25px;
 			}
 		}
 	}

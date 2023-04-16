@@ -12,7 +12,7 @@
 	transition: all 100ms ease-in-out;
 
 	overflow-y: auto;
-	z-index: 3;
+	z-index: 5;
 
 	&::-webkit-scrollbar {
 		width: 5px;
@@ -48,6 +48,7 @@
 
 		h3 {
 			vertical-align: middle;
+			pointer-events: none;
 		}
 	}
 
@@ -82,29 +83,43 @@
 		.searchingStatusRow {
 			@include displayFlex(row, flex-start, center);
 
-			.searchingStatusContainer {
-				@include displayFlex(row, center, center);
-				width: 14px;
-				height: 14px;
-				border: 2px solid #21d943;
-				cursor: pointer;
-
-				.searchingStatusContent {
-					width: 0px;
-					height: 0px;
-					background-color: #21d943;
-					transition: all 150ms ease-in-out;
-				}
-
-				.active {
-					width: 6px;
-					height: 6px;
-				}
-			}
-
 			p {
 				margin-left: 5px;
 			}
 		}
+	}
+}
+
+.searchingStatusContainerScaled {
+	position: absolute;
+	z-index: 4;
+	margin-top: -18px;
+	margin-right: -150px;
+	//right: 0;
+	scale: 1.6;
+}
+
+.searchingStatusContainer {
+	@include displayFlex(row, center, center);
+	width: 14px;
+	height: 14px;
+	border: 2px solid #21d943;
+	cursor: pointer;
+
+	.searchingStatusContent {
+		width: 0px;
+		height: 0px;
+		background-color: #21d943;
+		transition: all 150ms ease-in-out;
+	}
+
+	.activeScaled {
+		width: 6px;
+		height: 6px;
+	}
+
+	.active {
+		width: 6px;
+		height: 6px;
 	}
 }

@@ -36,6 +36,8 @@
 }
 .windowContainer .header h3 {
   vertical-align: middle;
+  pointer-events: none;
+  user-select: none;
 }
 .windowContainer .header .sortingColumn {
   display: flex;
@@ -68,6 +70,24 @@
 }
 .windowContainer .header .pagination .paginationButton:hover {
   color: #77ff90;
+}
+.windowContainer .header .searchCharContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.windowContainer .header .searchCharContainer input {
+  width: 60px;
+  height: 25px;
+  margin-left: 5px;
+  border: 2px solid #10601f;
+  background: #002900;
+  padding: 0px 15px;
+}
+.windowContainer .header .searchCharContainer input::-webkit-outer-spin-button,
+.windowContainer .header .searchCharContainer input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 .windowContainer .header .closeButton {
   cursor: pointer;
@@ -127,7 +147,7 @@
   align-content: stretch;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 45px;
+  margin-top: 50px;
 }
 .windowContainer .registerContainer .register {
   display: flex;
@@ -143,6 +163,7 @@
   background-color: rgba(0, 95, 0, 0.6);
   padding: 10px 20px;
   cursor: pointer;
+  border: 2px solid transparent;
   transition: all 150ms ease-in-out;
 }
 .windowContainer .registerContainer .register .registerPhoto {
@@ -154,8 +175,7 @@
   margin-top: 10px;
 }
 .windowContainer .registerContainer .register:hover {
-  border: 2px solid green;
-  padding: 15px 25px;
+  border: 2px solid rgba(33, 217, 67, 0.4941176471);
 }
 
 /*# sourceMappingURL=Eterminal.module.css.map */

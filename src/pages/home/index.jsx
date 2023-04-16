@@ -11,18 +11,21 @@ import axios from 'axios';
 import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 import CharTerminal from './CharTerminal';
+import CharSearcher from './CharSearcher';
 import Plate from '@/assets/svgs/placa.svg';
+import CharDetailsCard from './CharDetailsCard';
 
 // Redux
 import { connect } from 'react-redux';
-import { setCharacters } from '../../redux/actions';
+import { setCharacters, setCharCardVisible } from '../../redux/actions';
 
-function Home({ setCharacters, favourites }) {
+function Home({ setCharacters, favourites, selectedCharCard, setCharCardVisible }) {
 	const [autoLogWritting, setAutoLogWritting] = useState(true);
 	const [selectedOption, setSelectedOption] = useState(0);
 	const [blockedMenu, setBlockedMenu] = useState(false);
 	const router = useRouter();
 
+	const [charSearcherVisible, setCharSearcherVisible] = useState(false);
 	const [charTerminalVisible, setCharTerminalVisible] = useState(false);
 	const [charTerminalTypeOf, setCharTerminalTypeOf] = useState(1);
 
@@ -40,22 +43,33 @@ function Home({ setCharacters, favourites }) {
 		{
 			value: 2,
 			name: 'Search',
+			action: () => toggleCharTerminal(3),
 		},
-		{ value: 3, name: 'Exit console', action: router.back },
+		{
+			value: 3,
+			name: 'Exit console',
+			action: () => {
+				setCharCardVisible(false), router.back();
+			},
+		},
 	];
 
 	const toggleCharTerminal = (typeOf) => {
-		if (charTerminalVisible && charTerminalTypeOf === typeOf) {
-			setCharTerminalVisible(false);
-		} else if (charTerminalVisible && charTerminalTypeOf !== typeOf) {
-			setCharTerminalVisible(false);
-			setTimeout(() => {
+		if (typeOf === 3) {
+			setCharSearcherVisible(!charSearcherVisible);
+		} else {
+			if (charTerminalVisible && charTerminalTypeOf === typeOf) {
+				setCharTerminalVisible(false);
+			} else if (charTerminalVisible && charTerminalTypeOf !== typeOf) {
+				setCharTerminalVisible(false);
+				setTimeout(() => {
+					setCharTerminalTypeOf(typeOf);
+					setCharTerminalVisible(true);
+				}, 200);
+			} else if (!charTerminalVisible) {
 				setCharTerminalTypeOf(typeOf);
 				setCharTerminalVisible(true);
-			}, 200);
-		} else if (!charTerminalVisible) {
-			setCharTerminalTypeOf(typeOf);
-			setCharTerminalVisible(true);
+			}
 		}
 	};
 
@@ -206,6 +220,12 @@ function Home({ setCharacters, favourites }) {
 					setVisible={setCharTerminalVisible}
 					typeOf={charTerminalTypeOf}
 				/>
+				<CharSearcher visible={charSearcherVisible} setVisible={setCharSearcherVisible} />
+				<CharDetailsCard
+					visible={selectedCharCard.visible}
+					setVisible={setCharCardVisible}
+					charInfo={selectedCharCard.info}
+				/>
 			</main>
 		</>
 	);
@@ -214,10 +234,12 @@ function Home({ setCharacters, favourites }) {
 const mapStateToProps = (state) => ({
 	characters: state.main.characters,
 	favourites: state.main.favourites,
+	selectedCharCard: state.main.selectedCharCard,
 });
 
 const mapDispatchToProps = {
 	setCharacters: setCharacters,
+	setCharCardVisible: setCharCardVisible,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
