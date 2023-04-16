@@ -217,13 +217,13 @@ const SelectedCharacters = ({
 		<>
 			<div className={eterminal.header} style={{ position: 'absolute' }}>
 				<h3>@_wantedCriminals-Terminal</h3>
-				<span className={eterminal.pagination}>
+				{/* <span className={eterminal.pagination}>
 					Sort
 					<div className={eterminal.sortingColumn}>
 						<span className={eterminal.sortingButton}>▲</span>
 						<span className={eterminal.sortingButton}>▼</span>
 					</div>
-				</span>
+				</span> */}
 				<span onClick={closeWindow} className={eterminal.closeButton}>
 					X
 				</span>

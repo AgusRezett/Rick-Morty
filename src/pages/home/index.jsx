@@ -151,9 +151,18 @@ function Home({ setCharacters, favourites, selectedCharCard, setCharCardVisible 
 			</Head>
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
-				<Image src={Plate} width={300} height={300} className={styles.plate} alt={'official plate'} priority />
+				<Image
+					src={Plate}
+					width={300}
+					height={300}
+					className={styles.plate}
+					alt={'official plate'}
+					priority
+					unoptimized
+				/>
 				<div style={{ zIndex: 2, width: '100%' }}>
 					<h1>Welcome back Morty@B-308</h1>
+
 					<TypeAnimation
 						style={{ whiteSpace: 'pre-line', display: 'block', lineHeight: '15px' }}
 						sequence={[
@@ -177,7 +186,6 @@ function Home({ setCharacters, favourites, selectedCharCard, setCharCardVisible 
 					{!autoLogWritting && (
 						<>
 							<div style={{ width: '100%' }}>
-								<p style={{ wordBreak: 'break-all' }}>{favourites.map((char) => char.name)}</p>
 								<p style={{ marginTop: '14px' }}>================ criminals ==================</p>
 								{options.map(
 									(option) =>

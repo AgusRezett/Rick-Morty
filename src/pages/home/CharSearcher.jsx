@@ -52,9 +52,9 @@ function CharSearcher({
 			<div
 				style={{ right: !visible && '-100%', width: '600px', height: 'fit-content' }}
 				className={eterminal.windowContainer}
+				ref={nodeRef}
 			>
 				<div
-					ref={nodeRef}
 					className={eterminal.header}
 					style={{ position: !visible && 'absolute', right: !visible && '-100%' }}
 				>

@@ -27,7 +27,7 @@ export default function Home() {
 		event.preventDefault();
 
 		// Si la contraseña ingresada no coincide se añadirá el registro a la lista en formato de cascada
-		if (password !== '123456') {
+		if (password !== '@Model101') {
 			setAutoLogWritting(true);
 			const textContainer = document.getElementById('textContainer');
 			textContainer.innerHTML =
@@ -64,7 +64,7 @@ export default function Home() {
 					rel="stylesheet"
 				></link>
 			</Head>
-			{/* <Marquee
+			<Marquee
 				style={{
 					height: '150%',
 					overflowX: 'visible',
@@ -73,8 +73,7 @@ export default function Home() {
 				}}
 				direction={'right'}
 				gradient={false}
-			>
-			</Marquee> */}
+			></Marquee>
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
 				<div className={login.parentContainer} ref={boxRef}>
@@ -85,7 +84,7 @@ export default function Home() {
 						sequence={[
 							`
 						(.#) username: Morty@B-308\n
-						(.#) Morty@B-308's password (shift + p):`,
+						(.#) Morty@B-308's password:`,
 							() => {
 								setAutoLogWritting(false);
 								setTimeout(() => {
