@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 // Styles
-import styles from '@/styles/Home.module.css';
-import menu from '@/styles/Menu.module.css';
+import styles from '../../styles/Home.module.css';
+import menu from '../../styles/Menu.module.css';
 
 // Components
 import axios from 'axios';
@@ -12,7 +12,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { useRouter } from 'next/router';
 import CharTerminal from './CharTerminal';
 import CharSearcher from './CharSearcher';
-import Plate from '@/assets/svgs/placa.svg';
+import Plate from '../../assets/svgs/placa.svg';
 import CharDetailsCard from './CharDetailsCard';
 
 // Redux

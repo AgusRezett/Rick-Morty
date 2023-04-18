@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 // Styles
 import login from '../styles/Login.module.css';
-import styles from '@/styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 
 // Components
 import Marquee from 'react-fast-marquee';
@@ -64,7 +64,7 @@ export default function Home() {
 					rel="stylesheet"
 				></link>
 			</Head>
-			<Marquee
+			{/* <Marquee
 				style={{
 					height: '150%',
 					overflowX: 'visible',
@@ -73,7 +73,7 @@ export default function Home() {
 				}}
 				direction={'right'}
 				gradient={false}
-			></Marquee>
+			></Marquee> */}
 			<div className={styles.scanlines} />
 			<main className={styles.main}>
 				<div className={login.parentContainer} ref={boxRef}>
