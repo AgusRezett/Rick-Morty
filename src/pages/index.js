@@ -84,7 +84,8 @@ export default function Home() {
 						sequence={[
 							`
 						(.#) username: Morty@B-308\n
-						(.#) Morty@B-308's password:`,
+						(.#) Morty@B-308's password:\n
+						(.#) ... little hint: @Model101`,
 							() => {
 								setAutoLogWritting(false);
 								setTimeout(() => {
